@@ -1,16 +1,10 @@
-# Template
-
-- Change name and description in package.json
-- Change name, id, and description in manifest.json
-- Change PLUGIN_NAME in release.yml
-
-# Plugin Name
+# Obsidian Dynamic ToC
 
 Give an overview of your plugin overvew
 
 ## Contributing
 
-To make changes to this plugin, first ensure you have the dependencies installed.
+An Obsidian plugin to generate Tables of Contents that stay up to date with your document outline.
 
 ```bash
 yarn install
