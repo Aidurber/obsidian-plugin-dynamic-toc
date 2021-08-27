@@ -4,6 +4,6 @@
   "description": "An Obsidian plugin to generate Tables of Contents that stay up to date with your document outline.",
   "author": "aidurber",
   "minAppVersion": "0.11.0",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repo": "aidurber/obsidian-dynamic-toc"
 }
