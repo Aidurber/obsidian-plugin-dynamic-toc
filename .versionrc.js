@@ -9,7 +9,6 @@ const manifestUpdater = {
 
 const packageJson = {
   filename: "package.json",
-  // The `json` updater assumes the version is available under a `version` key in the provided JSON document.
   type: "json",
 };
 module.exports = {

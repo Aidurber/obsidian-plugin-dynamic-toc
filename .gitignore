@@ -6,3 +6,4 @@ yarn.lock
 .npmrc
 dist/
 .DS_STORE
+main.js

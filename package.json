@@ -6,19 +6,15 @@
   "license": "MIT",
   "scripts": {
     "dev": "obsidian-plugin dev src/main.ts",
-    "build": "rollup --config rollup.config.js",
+    "build": "obsidian-plugin build src/main.ts -o .",
     "release:dry": "standard-version -t '' --dry-run",
     "release": "standard-version -t '' -a"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^18.1.0",
-    "@rollup/plugin-node-resolve": "^11.2.1",
-    "@rollup/plugin-typescript": "^8.2.1",
     "detect-indent": "^6.1.0",
     "detect-newline": "^3.1.0",
     "obsidian": "obsidianmd/obsidian-api",
     "obsidian-plugin-cli": "^0.8.0",
-    "rollup": "^2.32.1",
     "standard-version": "^9.3.1",
     "stringify-package": "^1.0.1",
     "typescript": "^4.1.5"
