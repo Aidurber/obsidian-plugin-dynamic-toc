@@ -1,0 +1,9 @@
+{
+  "id": "plugin-id",
+  "name": "Plugin Name",
+  "description": "Give a meaningful description",
+  "author": "aidurber",
+  "minAppVersion": "0.11.0",
+  "version": "0.0.1",
+  "repo": "aidurber/plugin-id"
+}
