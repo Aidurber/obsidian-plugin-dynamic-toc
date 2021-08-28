@@ -1,13 +1,14 @@
-import { App, Component, MarkdownRenderer, parseYaml, TFile } from "obsidian";
+import { Component, MarkdownRenderer, parseYaml, TFile } from "obsidian";
+import { IHeadingExtractor } from "./HeadingExtractor";
 import { DynamicTOCSettings, TableOptions } from "./types";
 
 export class ContentsTableRenderer {
   constructor(
-    private app: App,
-    private source: string,
-    private element: HTMLElement,
-    private component: Component,
-    private settings: DynamicTOCSettings
+    protected headingExtractor: IHeadingExtractor,
+    protected source: string,
+    protected element: HTMLElement,
+    protected component: Component,
+    protected settings: DynamicTOCSettings
   ) {}
 
   private get options(): TableOptions {
@@ -28,35 +29,15 @@ export class ContentsTableRenderer {
   }
 
   /**
-   * Get the markdown headings for the current file
-   */
-  private getMarkdownHeadings = (file: TFile) => {
-    const { headings } = this.app.metadataCache.getFileCache(file);
-    const processableHeadings = headings.filter(
-      (h) =>
-        h.level >= this.options.min_depth && h.level <= this.options.max_depth
-    );
-    const firstHeadingDepth = processableHeadings[0].level;
-    return processableHeadings
-      .map((heading) => {
-        const itemIndication = (this.options.style === "number" && "1.") || "-";
-        const indent = new Array(Math.max(0, heading.level - firstHeadingDepth))
-          .fill("\t")
-          .join("");
-        return `${indent}${itemIndication} [[#${heading.heading}|${heading.heading}]]`;
-      })
-      .join("\n");
-  };
-
-  /**
    * Build the table of contents
    * @param file - Current file
    */
-  build = (file: TFile) => {
+  build = async (file: TFile) => {
     try {
-      this.clearElement();
-      const headings = this.getMarkdownHeadings(file);
-      MarkdownRenderer.renderMarkdown(
+      this.element.empty();
+      this.element.classList.add("table-of-contents");
+      const headings = this.headingExtractor.extract(file, this.options);
+      await MarkdownRenderer.renderMarkdown(
         headings,
         this.element,
         file.path,
@@ -65,12 +46,5 @@ export class ContentsTableRenderer {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  /**
-   * Clear the container HTML
-   */
-  private clearElement = () => {
-    this.element.empty();
   };
 }

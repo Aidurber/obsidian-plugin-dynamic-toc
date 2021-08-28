@@ -5,4 +5,6 @@ export interface TableOptions {
   max_depth: number;
 }
 
-export interface DynamicTOCSettings extends TableOptions {}
+export interface DynamicTOCSettings extends TableOptions {
+  injectionString?: string;
+}
