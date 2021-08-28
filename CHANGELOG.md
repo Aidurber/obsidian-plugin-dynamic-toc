@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.6...0.0.7) (2021-08-28)
+
+
+### Features
+
+* **dynamic:** add dymanic injection ([ac7b5be](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/ac7b5be3c432ed1b5b69bded6aefcdcb94b8f3b5))
+
 ### [0.0.6](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.5...0.0.6) (2021-08-28)
 
 
