@@ -1,32 +1,29 @@
 import { App, Component, MarkdownRenderer, parseYaml, TFile } from "obsidian";
-import { TableOptions } from "./types";
+import { DynamicTOCSettings, TableOptions } from "./types";
 
 export class ContentsTableRenderer {
   constructor(
     private app: App,
     private source: string,
     private element: HTMLElement,
-    private component: Component
+    private component: Component,
+    private settings: DynamicTOCSettings
   ) {}
-  private defaults: TableOptions = {
-    style: "bullet",
-    min_depth: 2,
-    max_depth: 6,
-  };
+
   private get options(): TableOptions {
     try {
       const options = parseYaml(this.source) as TableOptions;
-      const merged = Object.assign({}, this.defaults, options);
+      const merged = Object.assign({}, this.settings, options);
       return Object.keys(merged).reduce((acc, curr: keyof TableOptions) => {
         const value = options[curr];
         const isEmptyValue = typeof value === "undefined" || value === null;
         return {
           ...acc,
-          [curr]: isEmptyValue ? this.defaults[curr] : value,
+          [curr]: isEmptyValue ? this.settings[curr] : value,
         };
       }, {} as TableOptions);
     } catch (error) {
-      return this.defaults;
+      return this.settings;
     }
   }
 
