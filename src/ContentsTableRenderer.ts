@@ -1,22 +1,29 @@
 import { App, Component, MarkdownRenderer, parseYaml, TFile } from "obsidian";
-import { TableOptions } from "./types";
+import { DynamicTOCSettings, TableOptions } from "./types";
 
 export class ContentsTableRenderer {
   constructor(
     private app: App,
     private source: string,
     private element: HTMLElement,
-    private component: Component
+    private component: Component,
+    private settings: DynamicTOCSettings
   ) {}
-  private defaults: TableOptions = {
-    style: "bullet",
-  };
+
   private get options(): TableOptions {
     try {
       const options = parseYaml(this.source) as TableOptions;
-      return { ...this.defaults, ...options };
+      const merged = Object.assign({}, this.settings, options);
+      return Object.keys(merged).reduce((acc, curr: keyof TableOptions) => {
+        const value = options[curr];
+        const isEmptyValue = typeof value === "undefined" || value === null;
+        return {
+          ...acc,
+          [curr]: isEmptyValue ? this.settings[curr] : value,
+        };
+      }, {} as TableOptions);
     } catch (error) {
-      return this.defaults;
+      return this.settings;
     }
   }
 
@@ -25,7 +32,10 @@ export class ContentsTableRenderer {
    */
   private getMarkdownHeadings = (file: TFile) => {
     const { headings } = this.app.metadataCache.getFileCache(file);
-    const processableHeadings = headings.filter((h) => h.level !== 1);
+    const processableHeadings = headings.filter(
+      (h) =>
+        h.level >= this.options.min_depth && h.level <= this.options.max_depth
+    );
     const firstHeadingDepth = processableHeadings[0].level;
     return processableHeadings
       .map((heading) => {
