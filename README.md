@@ -6,6 +6,8 @@ An Obsidian plugin to generate Tables of Contents that stay up to date with your
 
 ## Usage
 
+### Code Block
+
 It's really simple to use, just add a code block to your document:
 
 **Defaults**
@@ -35,6 +37,18 @@ You can specify the options on a case-by-case basis in your documents, or you ca
 
 ```
 ````
+
+### Injection
+
+A more advanced feature you can use is custom injection. You can find an element by text to act as a render target. It's important to note that it matches against the rendered preview of your markdown. So `__TOC__` will match the following markdown `[__TOC__]` or `[[__TOC__]]` but will not match `__TOC__` because `__TOC__` once rendered will be a bold "TOC".
+
+Provide a Custom injection value such as:
+`__TOC__` will match `[[__TOC__]]` in your document
+`[toc]` will match `[toc]` in your document.
+
+Play around with it, try not to go too wild with it. This feature is to allow for consistency with another tool of your choice such as GitLab.
+
+![](media/settings.jpg)
 
 ## Contributing
 
