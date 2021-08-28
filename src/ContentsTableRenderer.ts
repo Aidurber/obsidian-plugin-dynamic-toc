@@ -10,11 +10,21 @@ export class ContentsTableRenderer {
   ) {}
   private defaults: TableOptions = {
     style: "bullet",
+    min_depth: 2,
+    max_depth: 6,
   };
   private get options(): TableOptions {
     try {
       const options = parseYaml(this.source) as TableOptions;
-      return { ...this.defaults, ...options };
+      const merged = Object.assign({}, this.defaults, options);
+      return Object.keys(merged).reduce((acc, curr: keyof TableOptions) => {
+        const value = options[curr];
+        const isEmptyValue = typeof value === "undefined" || value === null;
+        return {
+          ...acc,
+          [curr]: isEmptyValue ? this.defaults[curr] : value,
+        };
+      }, {} as TableOptions);
     } catch (error) {
       return this.defaults;
     }
@@ -25,7 +35,10 @@ export class ContentsTableRenderer {
    */
   private getMarkdownHeadings = (file: TFile) => {
     const { headings } = this.app.metadataCache.getFileCache(file);
-    const processableHeadings = headings.filter((h) => h.level !== 1);
+    const processableHeadings = headings.filter(
+      (h) =>
+        h.level >= this.options.min_depth && h.level <= this.options.max_depth
+    );
     const firstHeadingDepth = processableHeadings[0].level;
     return processableHeadings
       .map((heading) => {
