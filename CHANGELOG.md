@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.7...0.0.8) (2021-08-30)
+
+
+### Bug Fixes
+
+* **headings:** handle wiki link headings ([1f96b15](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/1f96b15e75b6d51f1ca8f66ba229035aeb781d74))
+
 ### [0.0.7](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.6...0.0.7) (2021-08-28)
 
 
