@@ -1,11 +1,13 @@
 import { App, TFile } from "obsidian";
-import { DynamicTOCSettings, TableOptions } from "./types";
+import { TableOptions } from "./types";
 
 export interface IHeadingExtractor {
   extract(file: TFile, options: TableOptions): string;
 }
 export class HeadingExtractor implements IHeadingExtractor {
   constructor(protected app: App) {}
+
+  private clean = (heading: string): string => heading.replace(/[[\]]/g, "");
   extract(file: TFile, options: TableOptions): string {
     const { headings } = this.app.metadataCache.getFileCache(file);
     const processableHeadings = headings.filter(
@@ -18,7 +20,8 @@ export class HeadingExtractor implements IHeadingExtractor {
         const indent = new Array(Math.max(0, heading.level - firstHeadingDepth))
           .fill("\t")
           .join("");
-        return `${indent}${itemIndication} [[#${heading.heading}|${heading.heading}]]`;
+        const cleanHeading = this.clean(heading.heading);
+        return `${indent}${itemIndication} [[#${cleanHeading}|${cleanHeading}]]`;
       })
       .join("\n");
   }
