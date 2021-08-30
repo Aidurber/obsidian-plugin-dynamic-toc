@@ -55,7 +55,7 @@ export default class DynamicTOCPlugin extends Plugin {
     this.app.metadataCache.on("changed", this.renderer.build);
   }
 
-  rerenderToC = () => {
+  private rerenderToC = () => {
     if (!this.renderer) return;
     this.renderer.build(this.app.workspace.getActiveFile());
   };
@@ -65,6 +65,7 @@ export default class DynamicTOCPlugin extends Plugin {
 
   saveSettings = async () => {
     await this.saveData(this.settings);
+    this.rerenderToC();
   };
 }
 
@@ -90,8 +91,7 @@ class DynamicTOCSettingsTab extends PluginSettingTab {
           .setValue(this.plugin.settings.style)
           .onChange(async (val) => {
             this.plugin.settings.style = val as BulletStyle;
-            await this.plugin.saveData(this.plugin.settings);
-            this.plugin.rerenderToC();
+            await this.plugin.saveSettings();
           })
       );
     new Setting(containerEl)
@@ -107,8 +107,7 @@ class DynamicTOCSettingsTab extends PluginSettingTab {
               new Notice("Min Depth is higher than Max Depth");
             } else {
               this.plugin.settings.min_depth = val;
-              await this.plugin.saveData(this.plugin.settings);
-              this.plugin.rerenderToC();
+              await this.plugin.saveSettings();
             }
           })
       );
@@ -125,8 +124,7 @@ class DynamicTOCSettingsTab extends PluginSettingTab {
               new Notice("Max Depth is higher than Min Depth");
             } else {
               this.plugin.settings.max_depth = val;
-              await this.plugin.saveData(this.plugin.settings);
-              this.plugin.rerenderToC();
+              await this.plugin.saveSettings();
             }
           })
       );
@@ -141,8 +139,7 @@ class DynamicTOCSettingsTab extends PluginSettingTab {
           .setValue(this.plugin.settings.injectionString)
           .onChange(async (val) => {
             this.plugin.settings.injectionString = val;
-            await this.plugin.saveData(this.plugin.settings);
-            this.plugin.rerenderToC();
+            await this.plugin.saveSettings();
           })
       );
   }
