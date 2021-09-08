@@ -1,3 +1,5 @@
+import { TFile } from "obsidian";
+
 export type BulletStyle = "bullet" | "number";
 export interface TableOptions {
   style: BulletStyle;
@@ -7,4 +9,7 @@ export interface TableOptions {
 
 export interface DynamicTOCSettings extends TableOptions {
   injectionString?: string;
+}
+export interface ExtendedTFile extends TFile {
+  deleted: boolean;
 }
