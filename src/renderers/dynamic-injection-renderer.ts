@@ -1,9 +1,7 @@
-import { App, MarkdownRenderChild, MarkdownRenderer } from "obsidian";
-import {
-  DynamicTOCSettings,
-  ExtendedTFile,
-  EXTERNAL_MARKDOWN_PREVIEW_STYLE,
-} from "../types";
+import { App, MarkdownRenderChild, MarkdownRenderer, TFile } from "obsidian";
+import { TABLE_CLASS_NAME, TABLE_CLASS_SELECTOR } from "src/constants";
+import { createTimer } from "src/utils/timer";
+import { DynamicTOCSettings, EXTERNAL_MARKDOWN_PREVIEW_STYLE } from "../types";
 import { extractHeadings } from "../utils/headings";
 
 export class DynamicInjectionRenderer extends MarkdownRenderChild {
@@ -16,12 +14,9 @@ export class DynamicInjectionRenderer extends MarkdownRenderChild {
     super(element);
   }
   async onload() {
-    await this.render();
+    this.render();
     this.app.metadataCache.on("changed", this.onFileChangeHandler);
-
-    // TODO extend obsidian types
     this.app.metadataCache.on(
-      //@ts-ignore
       "dynamic-toc:settings",
       this.onSettingsChangeHandler
     );
@@ -36,7 +31,7 @@ export class DynamicInjectionRenderer extends MarkdownRenderChild {
   onSettingsChangeHandler = () => {
     this.render();
   };
-  onFileChangeHandler = (file: ExtendedTFile) => {
+  onFileChangeHandler = (file: TFile) => {
     if (file.deleted || file.path !== this.filePath) return;
     this.render();
   };
@@ -58,6 +53,8 @@ export class DynamicInjectionRenderer extends MarkdownRenderChild {
     if (!matcher) {
       return;
     }
+    const timer = createTimer("dynamic injection renderer");
+    timer.start();
     let match: HTMLElement | null = null;
     try {
       match = this.findMatch(matcher);
@@ -71,13 +68,22 @@ export class DynamicInjectionRenderer extends MarkdownRenderChild {
       this.settings
     );
     const newElement = document.createElement("div");
-    newElement.classList.add("table-of-contents");
+    newElement.classList.add(TABLE_CLASS_NAME);
     await MarkdownRenderer.renderMarkdown(
       headings,
       newElement,
       this.filePath,
       this
     );
-    match.parentNode.replaceChild(newElement, match);
+    // Keep the match in the document as a hook but hide it
+    match.style.display = "none";
+    const existing = this.containerEl.querySelector(TABLE_CLASS_SELECTOR);
+    // We need to keep cleaning up after ourselves on settings or file changes
+    if (existing) {
+      this.containerEl.removeChild(existing);
+    }
+    // Attach the table to the parent of the match
+    match.parentNode.appendChild(newElement);
+    timer.stop();
   }
 }

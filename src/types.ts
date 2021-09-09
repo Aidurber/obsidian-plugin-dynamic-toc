@@ -1,4 +1,21 @@
-import { TFile } from "obsidian";
+import "obsidian";
+
+declare module "obsidian" {
+  interface MetadataCache {
+    trigger(
+      name: "dynamic-toc:settings",
+      settings: DynamicTOCSettings
+    ): EventRef;
+    on(
+      name: "dynamic-toc:settings",
+      callback: (api: DynamicTOCSettings) => any,
+      ctx?: any
+    ): EventRef;
+  }
+  interface TFile {
+    deleted: boolean;
+  }
+}
 
 export type BulletStyle = "bullet" | "number";
 export interface TableOptions {
@@ -14,7 +31,4 @@ export const EXTERNAL_MARKDOWN_PREVIEW_STYLE = {
 };
 export interface DynamicTOCSettings extends TableOptions {
   externalStyle: string;
-}
-export interface ExtendedTFile extends TFile {
-  deleted: boolean;
 }

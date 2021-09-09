@@ -1,7 +1,9 @@
-import { App, MarkdownRenderChild, MarkdownRenderer } from "obsidian";
+import { App, MarkdownRenderChild, MarkdownRenderer, TFile } from "obsidian";
 import { mergeSettings } from "../utils/config";
 import { extractHeadings } from "../utils/headings";
-import { DynamicTOCSettings, ExtendedTFile, TableOptions } from "../types";
+import { DynamicTOCSettings, TableOptions } from "../types";
+import { createTimer } from "src/utils/timer";
+import { TABLE_CLASS_NAME } from "src/constants";
 
 export class ContentsRenderer extends MarkdownRenderChild {
   constructor(
@@ -15,10 +17,7 @@ export class ContentsRenderer extends MarkdownRenderChild {
   async onload() {
     await this.render();
     this.app.metadataCache.on("changed", this.onFileChangeHandler);
-
-    // TODO extend obsidian types
     this.app.metadataCache.on(
-      //@ts-ignore
       "dynamic-toc:settings",
       this.onSettingsChangeHandler
     );
@@ -35,14 +34,16 @@ export class ContentsRenderer extends MarkdownRenderChild {
     this.config = mergeSettings(this.config, settings);
     this.render();
   };
-  onFileChangeHandler = (file: ExtendedTFile) => {
+  onFileChangeHandler = (file: TFile) => {
     if (file.deleted || file.path !== this.filePath) return;
     this.render();
   };
 
   async render() {
+    const timer = createTimer("codeblock renderer");
+    timer.start();
     this.container.empty();
-    this.container.classList.add("table-of-contents");
+    this.container.classList.add(TABLE_CLASS_NAME);
     const headings = extractHeadings(
       this.app.metadataCache.getCache(this.filePath),
       this.config
@@ -53,5 +54,6 @@ export class ContentsRenderer extends MarkdownRenderChild {
       this.filePath,
       this
     );
+    timer.stop();
   }
 }

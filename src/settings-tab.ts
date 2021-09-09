@@ -3,11 +3,8 @@ import { BulletStyle, EXTERNAL_MARKDOWN_PREVIEW_STYLE } from "./types";
 import DynamicTOCPlugin from "./main";
 
 export class DynamicTOCSettingsTab extends PluginSettingTab {
-  private readonly plugin: DynamicTOCPlugin;
-
-  constructor(app: App, plugin: DynamicTOCPlugin) {
+  constructor(app: App, private plugin: DynamicTOCPlugin) {
     super(app, plugin);
-    this.plugin = plugin;
   }
 
   display(): void {
@@ -64,7 +61,7 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("External rendering support")
       .setDesc(
-        "Different markdown viewers provided Table of Contents support such as [TOC] or [[TOC]]"
+        "Different markdown viewers provided Table of Contents support such as [TOC] or [[_TOC_]]"
       )
       .addDropdown((cb) =>
         cb
