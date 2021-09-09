@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.9...0.0.10) (2021-09-09)
+
+
+### Bug Fixes
+
+* use registerEvent ([9dfb443](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/9dfb443b00f18254e350bf9a368d746ad13e15ec))
+
 ### [0.0.9](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.8...0.0.9) (2021-09-09)
 
 
