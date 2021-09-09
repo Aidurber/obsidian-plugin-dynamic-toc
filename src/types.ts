@@ -7,8 +7,13 @@ export interface TableOptions {
   max_depth: number;
 }
 
+export const EXTERNAL_MARKDOWN_PREVIEW_STYLE = {
+  None: "",
+  TOC: "[TOC]",
+  _TOC_: "__TOC__",
+};
 export interface DynamicTOCSettings extends TableOptions {
-  injectionString?: string;
+  externalStyle: string;
 }
 export interface ExtendedTFile extends TFile {
   deleted: boolean;

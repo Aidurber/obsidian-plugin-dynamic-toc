@@ -1,5 +1,5 @@
 import { App, PluginSettingTab, Setting, Notice } from "obsidian";
-import { BulletStyle } from "./types";
+import { BulletStyle, EXTERNAL_MARKDOWN_PREVIEW_STYLE } from "./types";
 import DynamicTOCPlugin from "./main";
 
 export class DynamicTOCSettingsTab extends PluginSettingTab {
@@ -61,17 +61,25 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
             }
           })
       );
-
     new Setting(containerEl)
-      .setName("Custom injection value")
+      .setName("External rendering support")
       .setDesc(
-        "A raw text to find which will act as the indicator that you want to render a table of contents."
+        "Different markdown viewers provided Table of Contents support such as [TOC] or [[TOC]]"
       )
-      .addText((text) =>
-        text
-          .setValue(this.plugin.settings.injectionString)
-          .onChange(async (val) => {
-            this.plugin.settings.injectionString = val;
+      .addDropdown((cb) =>
+        cb
+          .addOptions(
+            Object.keys(EXTERNAL_MARKDOWN_PREVIEW_STYLE).reduce(
+              (acc, curr: keyof typeof EXTERNAL_MARKDOWN_PREVIEW_STYLE) => {
+                const value = EXTERNAL_MARKDOWN_PREVIEW_STYLE[curr];
+                return { ...acc, [curr]: value };
+              },
+              {} as Record<string, string>
+            )
+          )
+          .setValue(this.plugin.settings.externalStyle)
+          .onChange(async (val: string) => {
+            this.plugin.settings.externalStyle = val;
             await this.plugin.saveSettings();
           })
       );

@@ -4,6 +4,7 @@ import { DEFAULT_SETTINGS } from "./constants";
 import { ContentsRenderer } from "./renderers/contents-renderer";
 import { DynamicTOCSettingsTab } from "./settings-tab";
 import { DynamicTOCSettings } from "./types";
+import { DynamicInjectionRenderer } from "./renderers/dynamic-injection-renderer";
 
 export default class DynamicTOCPlugin extends Plugin {
   settings: DynamicTOCSettings;
@@ -11,11 +12,6 @@ export default class DynamicTOCPlugin extends Plugin {
     await this.loadSettings();
 
     this.addSettingTab(new DynamicTOCSettingsTab(this.app, this));
-    // this.dynamicPostProcessor = new DynamicInjectionPostProcessor(
-    //   this.headingExtractor,
-    //   this.app,
-    //   this.settings
-    // );
 
     this.registerMarkdownCodeBlockProcessor(
       "toc",
@@ -26,8 +22,22 @@ export default class DynamicTOCPlugin extends Plugin {
         );
       }
     );
-
-    // this.registerMarkdownPostProcessor(this.dynamicPostProcessor.process);
+    this.registerMarkdownPostProcessor(
+      (el: HTMLElement, ctx: MarkdownPostProcessorContext) => {
+        try {
+          ctx.addChild(
+            new DynamicInjectionRenderer(
+              this.app,
+              this.settings,
+              ctx.sourcePath,
+              el
+            )
+          );
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    );
   };
 
   loadSettings = async () => {
