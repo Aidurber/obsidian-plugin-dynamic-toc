@@ -15,19 +15,18 @@ export class DynamicInjectionRenderer extends MarkdownRenderChild {
   }
   async onload() {
     this.render();
-    this.app.metadataCache.on("changed", this.onFileChangeHandler);
-    this.app.metadataCache.on(
-      "dynamic-toc:settings",
-      this.onSettingsChangeHandler
+    this.registerEvent(
+      this.app.metadataCache.on(
+        //@ts-ignore
+        "dynamic-toc:settings",
+        this.onSettingsChangeHandler
+      )
+    );
+    this.registerEvent(
+      this.app.metadataCache.on("changed", this.onFileChangeHandler)
     );
   }
-  onunload() {
-    this.app.metadataCache.off("changed", this.onFileChangeHandler);
-    this.app.metadataCache.off(
-      "dynamic-toc:settings",
-      this.onSettingsChangeHandler
-    );
-  }
+
   onSettingsChangeHandler = () => {
     this.render();
   };

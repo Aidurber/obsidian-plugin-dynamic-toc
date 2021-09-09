@@ -1,22 +1,3 @@
-import "obsidian";
-
-declare module "obsidian" {
-  interface MetadataCache {
-    trigger(
-      name: "dynamic-toc:settings",
-      settings: DynamicTOCSettings
-    ): EventRef;
-    on(
-      name: "dynamic-toc:settings",
-      callback: (api: DynamicTOCSettings) => any,
-      ctx?: any
-    ): EventRef;
-  }
-  interface TFile {
-    deleted: boolean;
-  }
-}
-
 export type BulletStyle = "bullet" | "number";
 export interface TableOptions {
   style: BulletStyle;
