@@ -61,7 +61,7 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("External rendering support")
       .setDesc(
-        "Different markdown viewers provided Table of Contents support such as [TOC] or [[_TOC_]]"
+        "Different markdown viewers provided Table of Contents support such as [TOC] or [[_TOC_]]. You may need to restart Obsidian for this to take effect."
       )
       .addDropdown((cb) =>
         cb

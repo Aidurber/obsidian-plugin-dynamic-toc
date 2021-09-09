@@ -29,22 +29,21 @@ export class ContentsRenderer extends MarkdownRenderChild {
   }
 
   onSettingsChangeHandler = (settings: DynamicTOCSettings) => {
-    this.config = mergeSettings(this.config, settings);
-    this.render();
+    this.render(mergeSettings(this.config, settings));
   };
   onFileChangeHandler = (file: TFile) => {
     if (file.deleted || file.path !== this.filePath) return;
     this.render();
   };
 
-  async render() {
+  async render(configOverride?: TableOptions) {
     const timer = createTimer("codeblock renderer");
     timer.start();
     this.container.empty();
     this.container.classList.add(TABLE_CLASS_NAME);
     const headings = extractHeadings(
       this.app.metadataCache.getCache(this.filePath),
-      this.config
+      configOverride || this.config
     );
     await MarkdownRenderer.renderMarkdown(
       headings,

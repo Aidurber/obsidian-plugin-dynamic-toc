@@ -3,7 +3,7 @@ import { parseConfig } from "./utils/config";
 import { DEFAULT_SETTINGS } from "./constants";
 import { ContentsRenderer } from "./renderers/contents-renderer";
 import { DynamicTOCSettingsTab } from "./settings-tab";
-import { DynamicTOCSettings } from "./types";
+import { DynamicTOCSettings, EXTERNAL_MARKDOWN_PREVIEW_STYLE } from "./types";
 import { DynamicInjectionRenderer } from "./renderers/dynamic-injection-renderer";
 
 export default class DynamicTOCPlugin extends Plugin {
@@ -22,19 +22,34 @@ export default class DynamicTOCPlugin extends Plugin {
         );
       }
     );
+
     this.registerMarkdownPostProcessor(
       (el: HTMLElement, ctx: MarkdownPostProcessorContext) => {
+        const matcher =
+          EXTERNAL_MARKDOWN_PREVIEW_STYLE[
+            this.settings
+              .externalStyle as keyof typeof EXTERNAL_MARKDOWN_PREVIEW_STYLE
+          ];
+        if (!matcher) {
+          return;
+        }
+        let match: HTMLElement | null = null;
         try {
+          match = DynamicInjectionRenderer.findMatch(el, matcher);
+        } catch (error) {
+          console.error(error);
+        }
+
+        if (match?.parentNode) {
           ctx.addChild(
             new DynamicInjectionRenderer(
               this.app,
               this.settings,
               ctx.sourcePath,
-              el
+              el,
+              match
             )
           );
-        } catch (error) {
-          console.error(error);
         }
       }
     );
