@@ -5,6 +5,8 @@
     "inlineSources": true,
     "module": "ESNext",
     "target": "es6",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "allowJs": true,
     "noImplicitAny": true,
     "moduleResolution": "node",
