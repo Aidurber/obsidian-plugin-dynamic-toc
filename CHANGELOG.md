@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.13](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.12...0.0.13) (2021-09-24)
+
+
+### Features
+
+* **setting:** add support all renderer setting ([bdd8daa](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/bdd8daa89a33f3aaa19bd733a408f65a61790b03))
+* support multiple matchers ([362a824](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/362a8246b6799c39f22ddeab0dac10199f9e2cf1))
+
 ### [0.0.12](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.11...0.0.12) (2021-09-24)
 
 
