@@ -14,4 +14,5 @@ export const EXTERNAL_MARKDOWN_PREVIEW_STYLE = {
 };
 export interface DynamicTOCSettings extends TableOptions {
   externalStyle: string;
+  supportAllMatchers: boolean;
 }

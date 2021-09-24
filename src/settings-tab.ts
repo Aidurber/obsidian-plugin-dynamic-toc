@@ -58,7 +58,7 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
             }
           })
       );
-    new Setting(containerEl)
+    const externalRendererSetting = new Setting(containerEl)
       .setName("External rendering support")
       .setDesc(
         "Different markdown viewers provided Table of Contents support such as [TOC] or [[_TOC_]]. You may need to restart Obsidian for this to take effect."
@@ -74,9 +74,23 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
               {} as Record<string, string>
             )
           )
+          .setDisabled(this.plugin.settings.supportAllMatchers)
           .setValue(this.plugin.settings.externalStyle)
           .onChange(async (val: string) => {
             this.plugin.settings.externalStyle = val;
+            await this.plugin.saveSettings();
+          })
+      );
+
+    new Setting(containerEl)
+      .setName("Support all external renderers")
+      .setDesc("Cannot be used in conjunction with individual renderers")
+      .addToggle((cb) =>
+        cb
+          .setValue(this.plugin.settings.supportAllMatchers)
+          .onChange(async (val) => {
+            this.plugin.settings.supportAllMatchers = val;
+            externalRendererSetting.setDisabled(val);
             await this.plugin.saveSettings();
           })
       );
