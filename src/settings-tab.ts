@@ -1,5 +1,9 @@
 import { App, PluginSettingTab, Setting, Notice } from "obsidian";
-import { BulletStyle, EXTERNAL_MARKDOWN_PREVIEW_STYLE } from "./types";
+import {
+  BulletStyle,
+  ExternalMarkdownKey,
+  EXTERNAL_MARKDOWN_PREVIEW_STYLE,
+} from "./types";
 import DynamicTOCPlugin from "./main";
 
 export class DynamicTOCSettingsTab extends PluginSettingTab {
@@ -76,7 +80,7 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
           )
           .setDisabled(this.plugin.settings.supportAllMatchers)
           .setValue(this.plugin.settings.externalStyle)
-          .onChange(async (val: string) => {
+          .onChange(async (val: ExternalMarkdownKey) => {
             this.plugin.settings.externalStyle = val;
             await this.plugin.saveSettings();
           })

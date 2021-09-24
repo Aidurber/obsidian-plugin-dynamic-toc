@@ -25,18 +25,10 @@ export default class DynamicTOCPlugin extends Plugin {
 
     this.registerMarkdownPostProcessor(
       (el: HTMLElement, ctx: MarkdownPostProcessorContext) => {
-        let matchers: string[] = [];
-        const individualMatcher =
-          EXTERNAL_MARKDOWN_PREVIEW_STYLE[
-            this.settings
-              .externalStyle as keyof typeof EXTERNAL_MARKDOWN_PREVIEW_STYLE
-          ];
-        if (this.settings.supportAllMatchers === true) {
-          matchers = ALL_MATCHERS;
-        } else if (individualMatcher) {
-          matchers = [individualMatcher];
-        }
-        if (!matchers.length) return;
+        const matchers: string[] =
+          this.settings.supportAllMatchers === true
+            ? ALL_MATCHERS
+            : [EXTERNAL_MARKDOWN_PREVIEW_STYLE[this.settings.externalStyle]];
 
         for (let matcher of matchers) {
           const match = DynamicInjectionRenderer.findMatch(el, matcher);
