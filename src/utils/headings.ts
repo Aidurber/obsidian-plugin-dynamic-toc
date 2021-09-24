@@ -8,10 +8,12 @@ export function extractHeadings(
   fileMetaData: CachedMetadata,
   options: TableOptions
 ) {
+  if (!fileMetaData?.headings) return "";
   const { headings } = fileMetaData;
   const processableHeadings = headings.filter(
-    (h) => h.level >= options.min_depth && h.level <= options.max_depth
+    (h) => !!h && h.level >= options.min_depth && h.level <= options.max_depth
   );
+  if (!processableHeadings.length) return "";
   const firstHeadingDepth = processableHeadings[0].level;
   return processableHeadings
     .map((heading) => {
