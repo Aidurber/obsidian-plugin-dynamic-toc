@@ -12,6 +12,9 @@ export const EXTERNAL_MARKDOWN_PREVIEW_STYLE = {
   DevonThink: "{{toc}}",
   TheBrain: "[/toc/]",
 };
+
+export type ExternalMarkdownKey = keyof typeof EXTERNAL_MARKDOWN_PREVIEW_STYLE;
 export interface DynamicTOCSettings extends TableOptions {
-  externalStyle: string;
+  externalStyle: ExternalMarkdownKey;
+  supportAllMatchers: boolean;
 }
