@@ -51,6 +51,31 @@ This feature is to allow for consistency with another tool of your choice such a
 
 If you have another convention that is required for a markdown reader of your choosing. Create an issue with the name of the viewer and the convention that's used.
 
+#### Support All
+
+You can skip individual selection and support all renderers by checking "Support all external renderers" in settings.
+
+> ! If you add a new line between each identifier, you will get a new table of contents for each
+
+```markdown
+[/toc/]
+
+{{toc}}
+
+[[__TOC__]]
+
+[toc]
+```
+
+> ! If you add them all next to each other you will get a single block
+
+```markdown
+[/toc/]
+{{toc}}
+[[__TOC__]]
+[toc]
+```
+
 ## Contributing
 
 ```bash

@@ -1,6 +1,6 @@
 import { MarkdownPostProcessorContext, Plugin } from "obsidian";
 import { parseConfig } from "./utils/config";
-import { DEFAULT_SETTINGS } from "./constants";
+import { ALL_MATCHERS, DEFAULT_SETTINGS } from "./constants";
 import { ContentsRenderer } from "./renderers/contents-renderer";
 import { DynamicTOCSettingsTab } from "./settings-tab";
 import { DynamicTOCSettings, EXTERNAL_MARKDOWN_PREVIEW_STYLE } from "./types";
@@ -25,22 +25,17 @@ export default class DynamicTOCPlugin extends Plugin {
 
     this.registerMarkdownPostProcessor(
       (el: HTMLElement, ctx: MarkdownPostProcessorContext) => {
-        const matcher =
-          EXTERNAL_MARKDOWN_PREVIEW_STYLE[
-            this.settings
-              .externalStyle as keyof typeof EXTERNAL_MARKDOWN_PREVIEW_STYLE
-          ];
-        if (!matcher) {
-          return;
-        }
-        let match: HTMLElement | null = null;
-        try {
-          match = DynamicInjectionRenderer.findMatch(el, matcher);
-        } catch (error) {
-          console.error(error);
-        }
-
-        if (match?.parentNode) {
+        const matchers: string[] = this.settings.supportAllMatchers
+          ? ALL_MATCHERS
+          : [
+              EXTERNAL_MARKDOWN_PREVIEW_STYLE[
+                this.settings
+                  .externalStyle as keyof typeof EXTERNAL_MARKDOWN_PREVIEW_STYLE
+              ],
+            ];
+        for (let matcher of matchers) {
+          const match = DynamicInjectionRenderer.findMatch(el, matcher);
+          if (!match?.parentNode) continue;
           ctx.addChild(
             new DynamicInjectionRenderer(
               this.app,
