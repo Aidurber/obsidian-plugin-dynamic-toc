@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.11...0.0.12) (2021-09-24)
+
+
+### Features
+
+* add devonthink and thebrain support ([8b5532f](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/8b5532f9e9558f403bf6af1b1254b731df6579e0))
+
 ### [0.0.11](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.10...0.0.11) (2021-09-09)
 
 ### [0.0.10](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.9...0.0.10) (2021-09-09)
