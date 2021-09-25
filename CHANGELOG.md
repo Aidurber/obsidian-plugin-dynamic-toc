@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.13...0.0.14) (2021-09-25)
+
+
+### Bug Fixes
+
+* error when no matchers ([2723a6a](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/2723a6a9484d3b758bd7074536cf9ab9d3617b54))
+
 ### [0.0.13](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.12...0.0.13) (2021-09-24)
 
 
