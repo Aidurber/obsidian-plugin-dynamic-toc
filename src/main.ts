@@ -29,8 +29,8 @@ export default class DynamicTOCPlugin extends Plugin {
           this.settings.supportAllMatchers === true
             ? ALL_MATCHERS
             : [EXTERNAL_MARKDOWN_PREVIEW_STYLE[this.settings.externalStyle]];
-
         for (let matcher of matchers) {
+          if (!matcher) continue;
           const match = DynamicInjectionRenderer.findMatch(el, matcher);
           if (!match?.parentNode) continue;
           ctx.addChild(
