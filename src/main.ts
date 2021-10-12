@@ -32,7 +32,7 @@ export default class DynamicTOCPlugin extends Plugin {
         const matchers =
           this.settings.supportAllMatchers === true
             ? ALL_MATCHERS
-            : [EXTERNAL_MARKDOWN_PREVIEW_STYLE[this.settings.externalStyle]];
+            : [this.settings.externalStyle];
         for (let matcher of matchers as ExternalMarkdownKey[]) {
           if (!matcher || matcher === "None") continue;
           const match = DynamicInjectionRenderer.findMatch(
