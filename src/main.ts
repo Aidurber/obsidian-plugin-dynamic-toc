@@ -3,7 +3,11 @@ import { parseConfig } from "./utils/config";
 import { ALL_MATCHERS, DEFAULT_SETTINGS } from "./constants";
 import { ContentsRenderer } from "./renderers/contents-renderer";
 import { DynamicTOCSettingsTab } from "./settings-tab";
-import { DynamicTOCSettings, EXTERNAL_MARKDOWN_PREVIEW_STYLE } from "./types";
+import {
+  DynamicTOCSettings,
+  ExternalMarkdownKey,
+  EXTERNAL_MARKDOWN_PREVIEW_STYLE,
+} from "./types";
 import { DynamicInjectionRenderer } from "./renderers/dynamic-injection-renderer";
 
 export default class DynamicTOCPlugin extends Plugin {
@@ -25,13 +29,16 @@ export default class DynamicTOCPlugin extends Plugin {
 
     this.registerMarkdownPostProcessor(
       (el: HTMLElement, ctx: MarkdownPostProcessorContext) => {
-        const matchers: string[] =
+        const matchers =
           this.settings.supportAllMatchers === true
             ? ALL_MATCHERS
             : [EXTERNAL_MARKDOWN_PREVIEW_STYLE[this.settings.externalStyle]];
-        for (let matcher of matchers) {
-          if (!matcher) continue;
-          const match = DynamicInjectionRenderer.findMatch(el, matcher);
+        for (let matcher of matchers as ExternalMarkdownKey[]) {
+          if (!matcher || matcher === "None") continue;
+          const match = DynamicInjectionRenderer.findMatch(
+            el,
+            EXTERNAL_MARKDOWN_PREVIEW_STYLE[matcher as ExternalMarkdownKey]
+          );
           if (!match?.parentNode) continue;
           ctx.addChild(
             new DynamicInjectionRenderer(
