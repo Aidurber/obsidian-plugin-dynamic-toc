@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.17](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.16...0.0.17) (2021-11-10)
+
+
+### Features
+
+* add azure wiki provider ([d08797f](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/d08797f9594761aa2e2a173e541814f5f764dca5))
+
 ### [0.0.16](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.15...0.0.16) (2021-10-12)
 
 
