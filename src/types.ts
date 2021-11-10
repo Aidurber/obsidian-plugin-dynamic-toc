@@ -9,6 +9,7 @@ export const EXTERNAL_MARKDOWN_PREVIEW_STYLE = {
   None: "",
   TOC: "[TOC]",
   _TOC_: "__TOC__",
+  AzureWiki: "_TOC_",
   DevonThink: "{{toc}}",
   TheBrain: "[/toc/]",
 };
