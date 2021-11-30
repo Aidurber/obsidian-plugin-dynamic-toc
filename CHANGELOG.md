@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.18](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.17...0.0.18) (2021-11-30)
+
+
+### Features
+
+* add insert command ([c2c0bdd](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/c2c0bdd48ca6286bb48e478f8c6cc04fc43be741))
+
 ### [0.0.17](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.16...0.0.17) (2021-11-10)
 
 
