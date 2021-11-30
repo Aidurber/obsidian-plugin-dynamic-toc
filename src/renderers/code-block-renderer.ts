@@ -2,7 +2,6 @@ import { App, MarkdownRenderChild, MarkdownRenderer, TFile } from "obsidian";
 import { mergeSettings } from "../utils/config";
 import { extractHeadings } from "../utils/headings";
 import { DynamicTOCSettings, TableOptions } from "../types";
-import { createTimer } from "src/utils/timer";
 import { TABLE_CLASS_NAME } from "src/constants";
 
 export class CodeBlockRenderer extends MarkdownRenderChild {
@@ -37,8 +36,6 @@ export class CodeBlockRenderer extends MarkdownRenderChild {
   };
 
   async render(configOverride?: TableOptions) {
-    const timer = createTimer("codeblock renderer");
-    timer.start();
     this.container.empty();
     this.container.classList.add(TABLE_CLASS_NAME);
     const headings = extractHeadings(
@@ -51,6 +48,5 @@ export class CodeBlockRenderer extends MarkdownRenderChild {
       this.filePath,
       this
     );
-    timer.stop();
   }
 }
