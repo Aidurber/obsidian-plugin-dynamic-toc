@@ -76,6 +76,25 @@ You can skip individual selection and support all renderers by checking "Support
 [toc]
 ```
 
+### Insert Command
+
+You can insert a table of contents by using the command palette and selecting "Insert table of contents" and selecting the table of contents to insert
+
+![](media/toc-command.jpg)
+
+> Insert command
+
+![](media/toc-command-options.jpg)
+
+> Table of contents options.
+> Note that you will only see:
+>
+> 1. "Code Block" if you have no external renderers set in settings
+> 2. "Code Block" and a single external renderer if set in settings
+> 3. All possible options if you have "Support all external renderers" set in settings
+
+Remember you can set a hotkey in Obsidian for this command for even faster access.
+
 ## Contributing
 
 ```bash
