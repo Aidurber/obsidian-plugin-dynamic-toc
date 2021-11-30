@@ -1,4 +1,4 @@
-import { MarkdownPostProcessorContext, Plugin } from "obsidian";
+import { Editor, MarkdownPostProcessorContext, Plugin } from "obsidian";
 import { parseConfig } from "./utils/config";
 import { ALL_MATCHERS, DEFAULT_SETTINGS } from "./constants";
 import { CodeBlockRenderer } from "./renderers/code-block-renderer";
@@ -9,6 +9,7 @@ import {
   EXTERNAL_MARKDOWN_PREVIEW_STYLE,
 } from "./types";
 import { DynamicInjectionRenderer } from "./renderers/dynamic-injection-renderer";
+import { InsertCommandModal } from "./insert-command.modal";
 
 export default class DynamicTOCPlugin extends Plugin {
   settings: DynamicTOCSettings;
@@ -16,7 +17,17 @@ export default class DynamicTOCPlugin extends Plugin {
     await this.loadSettings();
     console.log("Dynamic TOC Loaded");
     this.addSettingTab(new DynamicTOCSettingsTab(this.app, this));
-
+    this.addCommand({
+      id: "dynamic-toc-insert-command",
+      name: "Insert Table of Contents",
+      editorCallback: (editor: Editor) => {
+        const modal = new InsertCommandModal(this.app, this);
+        modal.start((text: string) => {
+          editor.setCursor(editor.getCursor().line, 0);
+          editor.replaceSelection(text);
+        });
+      },
+    });
     this.registerMarkdownCodeBlockProcessor(
       "toc",
       (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => {
