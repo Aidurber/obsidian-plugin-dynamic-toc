@@ -5,7 +5,7 @@ import { DynamicTOCSettings, TableOptions } from "../types";
 import { createTimer } from "src/utils/timer";
 import { TABLE_CLASS_NAME } from "src/constants";
 
-export class ContentsRenderer extends MarkdownRenderChild {
+export class CodeBlockRenderer extends MarkdownRenderChild {
   constructor(
     private app: App,
     private config: TableOptions,

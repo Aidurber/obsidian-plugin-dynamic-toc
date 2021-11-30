@@ -1,7 +1,7 @@
 import { MarkdownPostProcessorContext, Plugin } from "obsidian";
 import { parseConfig } from "./utils/config";
 import { ALL_MATCHERS, DEFAULT_SETTINGS } from "./constants";
-import { ContentsRenderer } from "./renderers/contents-renderer";
+import { CodeBlockRenderer } from "./renderers/code-block-renderer";
 import { DynamicTOCSettingsTab } from "./settings-tab";
 import {
   DynamicTOCSettings,
@@ -22,7 +22,7 @@ export default class DynamicTOCPlugin extends Plugin {
       (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => {
         const options = parseConfig(source, this.settings);
         ctx.addChild(
-          new ContentsRenderer(this.app, options, ctx.sourcePath, el)
+          new CodeBlockRenderer(this.app, options, ctx.sourcePath, el)
         );
       }
     );
