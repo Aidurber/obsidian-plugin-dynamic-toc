@@ -1,6 +1,6 @@
 import { App, MarkdownRenderChild, MarkdownRenderer, TFile } from "obsidian";
 import { mergeSettings } from "../utils/config";
-import { extractHeadings } from "../utils/headings";
+import { extractHeadings } from "../utils/extract-headings";
 import { DynamicTOCSettings, TableOptions } from "../types";
 import { TABLE_CLASS_NAME } from "src/constants";
 
