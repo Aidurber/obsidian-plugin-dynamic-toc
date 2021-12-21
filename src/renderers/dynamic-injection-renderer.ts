@@ -1,7 +1,7 @@
 import { App, MarkdownRenderChild, MarkdownRenderer, TFile } from "obsidian";
 import { TABLE_CLASS_NAME, TABLE_CLASS_SELECTOR } from "src/constants";
 import { DynamicTOCSettings } from "../types";
-import { extractHeadings } from "../utils/headings";
+import { extractHeadings } from "../utils/extract-headings";
 
 export class DynamicInjectionRenderer extends MarkdownRenderChild {
   constructor(
@@ -45,7 +45,8 @@ export class DynamicInjectionRenderer extends MarkdownRenderChild {
   async render() {
     const headings = extractHeadings(
       this.app.metadataCache.getCache(this.filePath),
-      this.settings
+      this.settings,
+      this.settings // TODO refactor
     );
     const newElement = document.createElement("div");
     newElement.classList.add(TABLE_CLASS_NAME);

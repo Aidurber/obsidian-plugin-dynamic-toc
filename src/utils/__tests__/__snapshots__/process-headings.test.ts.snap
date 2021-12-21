@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Extract headings should match snapshot 1`] = `
+"1. [[#foo]]
+	1. [[#bar]]
+		1. [[#baz]]
+			1. [[#Something Alt Text|Alt Text]]"
+`;
