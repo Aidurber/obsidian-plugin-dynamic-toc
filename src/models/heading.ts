@@ -1,5 +1,5 @@
 import { HeadingCache } from "obsidian";
-
+// TODO refactor this
 export class Heading {
   constructor(private cached: HeadingCache) {}
 
