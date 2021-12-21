@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "obsidian-plugin dev src/main.ts",
+    "prebuild": "yarn test",
     "build": "obsidian-plugin build src/main.ts -o .",
     "release:dry": "standard-version -t '' --dry-run",
     "release": "standard-version -t '' -a",
