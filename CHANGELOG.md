@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.19](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.18...0.0.19) (2021-12-21)
+
+
+### Bug Fixes
+
+* correctly parse link headings with aliases ([a90275b](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/a90275b33a91c276fd34f0fc15d7eeb35b500568))
+* hide new extractor behind feature flag ([e82eac4](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/e82eac4e23ff1898dbf555fa8524b64bde502d00))
+* set new header extractor to false ([4add54b](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/4add54b1e8ada2835f246636f7ba1f20842a7ba5))
+
 ### [0.0.18](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.17...0.0.18) (2021-11-30)
 
 
