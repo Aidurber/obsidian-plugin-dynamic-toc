@@ -98,5 +98,18 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
             await this.plugin.saveSettings();
           })
       );
+    new Setting(containerEl)
+      .setName("Experimental: New header extraction")
+      .setDesc(
+        "New mechanism for extracting headers for more consistent handling of aliases and link headers"
+      )
+      .addToggle((cb) =>
+        cb
+          .setValue(this.plugin.settings.useNewHeaderExtraction)
+          .onChange(async (val) => {
+            this.plugin.settings.useNewHeaderExtraction = val;
+            await this.plugin.saveSettings();
+          })
+      );
   }
 }

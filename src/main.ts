@@ -33,7 +33,13 @@ export default class DynamicTOCPlugin extends Plugin {
       (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => {
         const options = parseConfig(source, this.settings);
         ctx.addChild(
-          new CodeBlockRenderer(this.app, options, ctx.sourcePath, el)
+          new CodeBlockRenderer(
+            this.app,
+            options,
+            ctx.sourcePath,
+            el,
+            this.settings
+          )
         );
       }
     );

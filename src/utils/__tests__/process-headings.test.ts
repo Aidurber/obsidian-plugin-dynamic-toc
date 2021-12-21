@@ -1,5 +1,5 @@
 import { CachedMetadata } from "obsidian";
-import { TableOptions } from "src/types";
+import { DynamicTOCSettings, TableOptions } from "src/types";
 import { extractHeadings } from "../extract-headings";
 
 describe("Extract headings", () => {
@@ -29,6 +29,10 @@ describe("Extract headings", () => {
       min_depth: 1,
       style: "number",
     } as TableOptions;
-    expect(extractHeadings(fileMetaData, options)).toMatchSnapshot();
+    expect(
+      extractHeadings(fileMetaData, options, {
+        useNewHeaderExtraction: true,
+      } as DynamicTOCSettings)
+    ).toMatchSnapshot();
   });
 });
