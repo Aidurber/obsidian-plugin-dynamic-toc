@@ -18,5 +18,4 @@ export type ExternalMarkdownKey = keyof typeof EXTERNAL_MARKDOWN_PREVIEW_STYLE;
 export interface DynamicTOCSettings extends TableOptions {
   externalStyle: ExternalMarkdownKey;
   supportAllMatchers: boolean;
-  useNewHeaderExtraction: boolean;
 }

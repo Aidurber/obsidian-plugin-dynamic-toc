@@ -15,7 +15,6 @@ export default class DynamicTOCPlugin extends Plugin {
   settings: DynamicTOCSettings;
   onload = async () => {
     await this.loadSettings();
-    console.log("Dynamic TOC Loaded");
     this.addSettingTab(new DynamicTOCSettingsTab(this.app, this));
     this.addCommand({
       id: "dynamic-toc-insert-command",
@@ -33,13 +32,7 @@ export default class DynamicTOCPlugin extends Plugin {
       (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => {
         const options = parseConfig(source, this.settings);
         ctx.addChild(
-          new CodeBlockRenderer(
-            this.app,
-            options,
-            ctx.sourcePath,
-            el,
-            this.settings
-          )
+          new CodeBlockRenderer(this.app, options, ctx.sourcePath, el)
         );
       }
     );

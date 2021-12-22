@@ -9,8 +9,7 @@ export class CodeBlockRenderer extends MarkdownRenderChild {
     private app: App,
     private config: TableOptions,
     private filePath: string,
-    public container: HTMLElement,
-    private settings: DynamicTOCSettings
+    public container: HTMLElement
   ) {
     super(container);
   }
@@ -41,8 +40,7 @@ export class CodeBlockRenderer extends MarkdownRenderChild {
     this.container.classList.add(TABLE_CLASS_NAME);
     const headings = extractHeadings(
       this.app.metadataCache.getCache(this.filePath),
-      configOverride || this.config,
-      this.settings
+      configOverride || this.config
     );
     await MarkdownRenderer.renderMarkdown(
       headings,
