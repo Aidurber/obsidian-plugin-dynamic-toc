@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.20](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.19...0.0.20) (2021-12-22)
+
 ### [0.0.19](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.18...0.0.19) (2021-12-21)
 
 
