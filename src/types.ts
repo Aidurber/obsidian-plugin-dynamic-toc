@@ -3,6 +3,7 @@ export interface TableOptions {
   style: BulletStyle;
   min_depth: number;
   max_depth: number;
+  title?: string;
 }
 
 export const EXTERNAL_MARKDOWN_PREVIEW_STYLE = {

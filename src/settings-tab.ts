@@ -62,6 +62,20 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
             }
           })
       );
+    new Setting(containerEl)
+      .setName("Title")
+      .setDesc(
+        "The title of the table of contents, supports simple markdown such as ## Contents or **Contents**"
+      )
+      .addText((text) =>
+        text
+          .setPlaceholder("## Table of Contents")
+          .setValue(this.plugin.settings.title)
+          .onChange(async (val) => {
+            this.plugin.settings.title = val;
+            this.plugin.saveSettings();
+          })
+      );
     const externalRendererSetting = new Setting(containerEl)
       .setName("External rendering support")
       .setDesc(

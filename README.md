@@ -17,6 +17,7 @@ It's really simple to use, just add a code block to your document:
 	style: bullet | number (default: bullet)
 	min_depth: number (default: 2)
 	max_depth: number (default: 6)
+	title: string (default: undefined)
 ```
 ````
 
@@ -94,6 +95,18 @@ You can insert a table of contents by using the command palette and selecting "I
 > 3. All possible options if you have "Support all external renderers" set in settings
 
 Remember you can set a hotkey in Obsidian for this command for even faster access.
+
+### Titles
+
+You can add a title to every injected table of contents by using the Title option in setttings or inline inside a codeblock for example:
+
+````markdown
+```toc
+	title: "## Table of Contents"
+```
+````
+
+> ⚠️ If you are adding Markdown syntax to your title in the code block, you must wrap it in double quotes.
 
 ## Contributing
 

@@ -5,7 +5,8 @@ import { TableOptions } from "../types";
 function buildMarkdownTextV2(headings: Heading[], options: TableOptions) {
   const firstHeadingDepth = headings[0].level;
 
-  return headings
+  let output = options.title ? `${options.title}\n` : "";
+  output += headings
     .map((heading) => {
       const itemIndication = (options.style === "number" && "1.") || "-";
       const indent = new Array(Math.max(0, heading.level - firstHeadingDepth))
@@ -15,6 +16,7 @@ function buildMarkdownTextV2(headings: Heading[], options: TableOptions) {
       return `${indent}${itemIndication} ${heading.markdownHref}`;
     })
     .join("\n");
+  return output;
 }
 export function extractHeadings(
   fileMetaData: CachedMetadata,
