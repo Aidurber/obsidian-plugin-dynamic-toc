@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.21](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.20...0.0.21) (2022-01-01)
+
+
+### Features
+
+* add title support ([6a72d46](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/6a72d46b07656d8bbbf559df14469b8fe96bd524))
+
 ### [0.0.20](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.19...0.0.20) (2021-12-22)
 
 ### [0.0.19](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.18...0.0.19) (2021-12-21)
