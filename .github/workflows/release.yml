@@ -2,6 +2,8 @@ name: Release obsidian plugin
 
 on:
   push:
+    branches:
+      - dev
     # Sequence of patterns matched against refs/tags
     tags:
       - "*" # Push events to matching any tag format, i.e. 1.0, 20.15.10
