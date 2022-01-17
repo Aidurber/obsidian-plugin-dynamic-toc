@@ -7,3 +7,4 @@ yarn.lock
 dist/
 .DS_STORE
 main.js
+styles.css
