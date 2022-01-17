@@ -1,0 +1,20 @@
+.is-live-preview .dynamic-toc > * {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.is-live-preview .dynamic-toc > * br {
+    display: none;
+}
+
+.is-live-preview .dynamic-toc > *:first-child {
+    margin-top: 16px;
+}
+
+.is-live-preview .dynamic-toc > *:last-child {
+    margin-bottom: 16px;
+}
+
+.is-live-preview .dynamic-toc ul {
+    white-space: normal;
+}

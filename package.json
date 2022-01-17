@@ -5,10 +5,10 @@
   "main": "main.js",
   "license": "MIT",
   "scripts": {
-    "dev": "obsidian-plugin dev src/main.ts",
+    "dev": "obsidian-plugin dev -S src/styles.css src/main.ts",
     "prebuild": "yarn test",
     "type-check": "tsc --noEmit",
-    "build": "obsidian-plugin build src/main.ts -o .",
+    "build": "obsidian-plugin build -S src/styles.css src/main.ts -o .",
     "release:dry": "standard-version -t '' --dry-run",
     "release": "standard-version -t '' -a",
     "test": "jest",
