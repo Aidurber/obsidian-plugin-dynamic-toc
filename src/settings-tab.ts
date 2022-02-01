@@ -112,5 +112,18 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
             await this.plugin.saveSettings();
           })
       );
+    new Setting(containerEl)
+      .setName("Allow inconsistent heading levels")
+      .setDesc(
+        "NOT RECOMMENDED (may be removed in future): If enabled, the table of contents will be generated even if the header depth is inconsistent. This may cause the table of contents to be rendered incorrectly."
+      )
+      .addToggle((cb) =>
+        cb
+          .setValue(this.plugin.settings.allow_inconsistent_headings)
+          .onChange(async (val) => {
+            this.plugin.settings.allow_inconsistent_headings = val;
+            await this.plugin.saveSettings();
+          })
+      );
   }
 }

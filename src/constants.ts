@@ -10,6 +10,7 @@ export const DEFAULT_SETTINGS: DynamicTOCSettings = {
   max_depth: 6,
   externalStyle: "None",
   supportAllMatchers: false,
+  allow_inconsistent_headings: false,
 };
 
 export const TABLE_CLASS_NAME = "dynamic-toc";

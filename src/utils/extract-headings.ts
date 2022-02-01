@@ -2,21 +2,29 @@ import { CachedMetadata } from "obsidian";
 import { Heading } from "../models/heading";
 import { TableOptions } from "../types";
 
-function buildMarkdownTextV2(headings: Heading[], options: TableOptions) {
+function buildMarkdownText(headings: Heading[], options: TableOptions): string {
   const firstHeadingDepth = headings[0].level;
+  const list: string[] = [];
+  if (options.title) {
+    list.push(`${options.title}`);
+  }
+  let previousIndent = 0;
+  for (let i = 0; i < headings.length; i++) {
+    const heading = headings[i];
+    const itemIndication = (options.style === "number" && "1.") || "-";
+    let numIndents = new Array(Math.max(0, heading.level - firstHeadingDepth));
 
-  let output = options.title ? `${options.title}\n` : "";
-  output += headings
-    .map((heading) => {
-      const itemIndication = (options.style === "number" && "1.") || "-";
-      const indent = new Array(Math.max(0, heading.level - firstHeadingDepth))
-        .fill("\t")
-        .join("");
+    if (options.allow_inconsistent_headings) {
+      if (numIndents.length - previousIndent > 1) {
+        numIndents = new Array(previousIndent + 1);
+      }
+      previousIndent = numIndents.length;
+    }
 
-      return `${indent}${itemIndication} ${heading.markdownHref}`;
-    })
-    .join("\n");
-  return output;
+    const indent = numIndents.fill("\t").join("");
+    list.push(`${indent}${itemIndication} ${heading.markdownHref}`);
+  }
+  return list.join("\n");
 }
 export function extractHeadings(
   fileMetaData: CachedMetadata,
@@ -27,9 +35,8 @@ export function extractHeadings(
   const processableHeadings = headings.filter(
     (h) => !!h && h.level >= options.min_depth && h.level <= options.max_depth
   );
-
   if (!processableHeadings.length) return "";
-  return buildMarkdownTextV2(
+  return buildMarkdownText(
     processableHeadings.map((h) => new Heading(h)),
     options
   );
