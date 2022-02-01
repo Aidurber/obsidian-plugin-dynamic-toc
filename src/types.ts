@@ -4,6 +4,7 @@ export interface TableOptions {
   min_depth: number;
   max_depth: number;
   title?: string;
+  allow_inconsistent_headings: boolean;
 }
 
 export const EXTERNAL_MARKDOWN_PREVIEW_STYLE = {

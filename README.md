@@ -4,6 +4,28 @@ An Obsidian plugin to generate Tables of Contents that stay up to date with your
 
 ![](media/screenshot.jpg)
 
+## Foreword
+
+This plugin attempts to parse your document headings and generate a markdown table of contents for them. There have been a handful of issues raised which are due to how people are using headings. Headings offer a lexical structure to a document, they are not intended to be used for style.
+
+The following is an example of inconsistent heading depth. Instead of a level 4 heading it should be a level 3 heading.
+
+```md
+## Level 2
+
+#### Level 4
+```
+
+The following is an example of consistent heading depth. After a level 2 heading the next level is 3
+
+```md
+## Level 2
+
+### Level 3
+```
+
+👉 You can of course choose to structure your documents **as you wish**, but this plugin may not work effectively. I do attempt to make some exceptions but I will hide them behind settings to not interfere with peoples work flows, reduce stability, and to keep development time low. See [Inconsistent Heading Depth](#inconsistent-heading-depth)
+
 ## Usage
 
 ### Code Block
@@ -18,6 +40,7 @@ It's really simple to use, just add a code block to your document:
 	min_depth: number (default: 2)
 	max_depth: number (default: 6)
 	title: string (default: undefined)
+	allow_inconsistent_headings: boolean (default: false)
 ```
 ````
 
@@ -107,6 +130,30 @@ You can add a title to every injected table of contents by using the Title optio
 ````
 
 > ⚠️ If you are adding Markdown syntax to your title in the code block, you must wrap it in double quotes.
+
+### Inconsistent Heading Depth
+
+As mentioned in the foreword above, this is not recommended, but there is a setting you can enable which will try and support you the best it can.
+
+Given a heading structure such as:
+
+```md
+## Level 2
+
+#### Level 4
+
+##### Level 5
+
+## Level 2
+
+### Level 3
+```
+
+With this option enabled, it will produce the following table of contents:
+
+![](media/inconsistent-heading-depth.jpg)
+
+> ⚠️ Notice that the Level 4 and Level 3 headings are at the same depth
 
 ## Contributing
 
