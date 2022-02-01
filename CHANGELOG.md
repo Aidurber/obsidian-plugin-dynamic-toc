@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.24](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.23...0.0.24) (2022-02-01)
+
+
+### Features
+
+* support inconsistent heading depths ([3ffb6d7](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/3ffb6d70281b461527f9d0c6c30754efd65f7638))
+
 ### [0.0.23](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.22...0.0.23) (2022-01-17)
 
 
