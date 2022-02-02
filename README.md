@@ -70,6 +70,8 @@ Inline styles render the highest level of heading such as H2 `## Heading 2`, you
 
 ![](media/inline-headings.jpg)
 
+See [Feature Request: Inline Links](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/issues/42)
+
 ### Varied Style
 
 Varied style allows for setting the topmost level of your headings, and the rest of the levels to the opposite style.
@@ -83,6 +85,8 @@ For example if you have `varied_style` set to true and your list style is bullet
 **Style: Number**
 
 ![](media/varied-style-number.jpg)
+
+See [Feature Request: Mixed List Style](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/issues/35)
 
 ### External Rendering Support
 
