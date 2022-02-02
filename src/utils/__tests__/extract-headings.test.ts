@@ -22,6 +22,14 @@ describe("Extract headings", () => {
           heading: "[[Something|Alt Text]]",
           level: 4,
         },
+        {
+          heading: "level 1",
+          level: 1,
+        },
+        {
+          heading: "level 1 a",
+          level: 2,
+        },
       ],
     } as CachedMetadata;
     it("should match snapshot", () => {
@@ -29,6 +37,25 @@ describe("Extract headings", () => {
         max_depth: 4,
         min_depth: 1,
         style: "number",
+      } as TableOptions;
+      expect(extractHeadings(defaultHeadings, options)).toMatchSnapshot();
+    });
+
+    it("should match snapshot when varied_style is true and style is bullet", () => {
+      const options = {
+        max_depth: 4,
+        min_depth: 1,
+        style: "bullet",
+        varied_style: true,
+      } as TableOptions;
+      expect(extractHeadings(defaultHeadings, options)).toMatchSnapshot();
+    });
+    it("should match snapshot when varied_style is true and style is number", () => {
+      const options = {
+        max_depth: 4,
+        min_depth: 1,
+        style: "number",
+        varied_style: true,
       } as TableOptions;
       expect(extractHeadings(defaultHeadings, options)).toMatchSnapshot();
     });

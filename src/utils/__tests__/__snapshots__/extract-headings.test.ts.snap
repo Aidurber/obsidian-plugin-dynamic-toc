@@ -4,7 +4,27 @@ exports[`Extract headings build markdown text should match snapshot 1`] = `
 "1. [[#foo]]
 	1. [[#bar]]
 		1. [[#baz]]
-			1. [[#Something Alt Text|Alt Text]]"
+			1. [[#Something Alt Text|Alt Text]]
+1. [[#level 1]]
+	1. [[#level 1 a]]"
+`;
+
+exports[`Extract headings build markdown text should match snapshot when varied_style is true and style is bullet 1`] = `
+"- [[#foo]]
+	1. [[#bar]]
+		1. [[#baz]]
+			1. [[#Something Alt Text|Alt Text]]
+- [[#level 1]]
+	1. [[#level 1 a]]"
+`;
+
+exports[`Extract headings build markdown text should match snapshot when varied_style is true and style is number 1`] = `
+"1. [[#foo]]
+	- [[#bar]]
+		- [[#baz]]
+			- [[#Something Alt Text|Alt Text]]
+1. [[#level 1]]
+	- [[#level 1 a]]"
 `;
 
 exports[`Extract headings build markdown text should match snapshot with inconsistent heading levels 1`] = `
@@ -19,5 +39,7 @@ exports[`Extract headings build markdown text should match snapshot with title 1
 1. [[#foo]]
 	1. [[#bar]]
 		1. [[#baz]]
-			1. [[#Something Alt Text|Alt Text]]"
+			1. [[#Something Alt Text|Alt Text]]
+1. [[#level 1]]
+	1. [[#level 1 a]]"
 `;

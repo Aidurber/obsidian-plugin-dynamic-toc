@@ -42,6 +42,7 @@ It's really simple to use, just add a code block to your document:
 	title: string (default: undefined)
 	allow_inconsistent_headings: boolean (default: false)
 	delimiter: string (default: |)
+	varied_style: boolean (default: false)
 ```
 ````
 
@@ -68,6 +69,20 @@ You can specify the options on a case-by-case basis in your documents, or you ca
 Inline styles render the highest level of heading such as H2 `## Heading 2`, you can couple this with the delimiter option to generate a breadcrumbs like effect for your headings.
 
 ![](media/inline-headings.jpg)
+
+### Varied Style
+
+Varied style allows for setting the topmost level of your headings, and the rest of the levels to the opposite style.
+
+For example if you have `varied_style` set to true and your list style is bullet, the first level will be bullet and the subsequent headings will be number style.
+
+**Style: Bullet**
+
+![](media/varied-style-bullet.jpg)
+
+**Style: Number**
+
+![](media/varied-style-number.jpg)
 
 ### External Rendering Support
 
