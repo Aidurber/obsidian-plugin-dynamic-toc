@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.26](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.25...0.0.26) (2022-02-02)
+
+
+### Features
+
+* add varied style support ([f5afc17](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/f5afc1731e837568f6978b1cf9cf15b762cd95f5))
+
 ### [0.0.25](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.24...0.0.25) (2022-02-02)
 
 
