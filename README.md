@@ -36,11 +36,12 @@ It's really simple to use, just add a code block to your document:
 
 ````markdown
 ```toc
-	style: bullet | number (default: bullet)
+	style: bullet | number | inline (default: bullet)
 	min_depth: number (default: 2)
 	max_depth: number (default: 6)
 	title: string (default: undefined)
 	allow_inconsistent_headings: boolean (default: false)
+	delimiter: string (default: |)
 ```
 ````
 
@@ -61,6 +62,12 @@ You can specify the options on a case-by-case basis in your documents, or you ca
 
 ```
 ````
+
+### Inline Style
+
+Inline styles render the highest level of heading such as H2 `## Heading 2`, you can couple this with the delimiter option to generate a breadcrumbs like effect for your headings.
+
+![](media/inline-headings.jpg)
 
 ### External Rendering Support
 

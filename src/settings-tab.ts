@@ -21,13 +21,29 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
       .setDesc("The table indication")
       .addDropdown((cb) =>
         cb
-          .addOptions({ bullet: "Bullet", number: "Number" })
+          .addOptions({ bullet: "Bullet", number: "Number", inline: "Inline" })
           .setValue(this.plugin.settings.style)
           .onChange(async (val) => {
             this.plugin.settings.style = val as BulletStyle;
             await this.plugin.saveSettings();
           })
       );
+
+    new Setting(containerEl)
+      .setName("Delimiter")
+      .setDesc(
+        "Only used when list style is inline. The delimiter between the list items"
+      )
+      .addText((text) =>
+        text
+          .setPlaceholder("e.g. -, *, ~")
+          .setValue(this.plugin.settings.delimiter)
+          .onChange(async (val) => {
+            this.plugin.settings.delimiter = val;
+            this.plugin.saveSettings();
+          })
+      );
+
     new Setting(containerEl)
       .setName("Minimum Header Depth")
       .setDesc("The default minimum header depth to render")

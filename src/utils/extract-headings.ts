@@ -2,6 +2,31 @@ import { CachedMetadata } from "obsidian";
 import { Heading } from "../models/heading";
 import { TableOptions } from "../types";
 
+export function extractHeadings(
+  fileMetaData: CachedMetadata,
+  options: TableOptions
+) {
+  if (!fileMetaData?.headings) return "";
+  const { headings } = fileMetaData;
+  const processableHeadings = headings.filter(
+    (h) => !!h && h.level >= options.min_depth && h.level <= options.max_depth
+  );
+  if (!processableHeadings.length) return "";
+
+  const headingInstances = processableHeadings.map((h) => new Heading(h));
+  if (options.style === "inline") {
+    return buildInlineMarkdownText(headingInstances, options);
+  }
+
+  return buildMarkdownText(headingInstances, options);
+}
+
+/**
+ * Generate markdown for a standard table of contents
+ * @param headings - Array of heading instances
+ * @param options - Code block options
+ * @returns
+ */
 function buildMarkdownText(headings: Heading[], options: TableOptions): string {
   const firstHeadingDepth = headings[0].level;
   const list: string[] = [];
@@ -26,18 +51,23 @@ function buildMarkdownText(headings: Heading[], options: TableOptions): string {
   }
   return list.join("\n");
 }
-export function extractHeadings(
-  fileMetaData: CachedMetadata,
-  options: TableOptions
-) {
-  if (!fileMetaData?.headings) return "";
-  const { headings } = fileMetaData;
-  const processableHeadings = headings.filter(
-    (h) => !!h && h.level >= options.min_depth && h.level <= options.max_depth
+
+/**
+ * Generate the markdown for the inline style
+ * @param headings - Array of heading instances
+ * @param options - Code block options
+ * @returns
+ */
+function buildInlineMarkdownText(headings: Heading[], options: TableOptions) {
+  const highestDepth = headings
+    .map((h) => h.level)
+    .reduce((a, b) => Math.min(a, b));
+  // all headings at the same level as the highest depth
+  const topLevelHeadings = headings.filter(
+    (heading) => heading.level === highestDepth
   );
-  if (!processableHeadings.length) return "";
-  return buildMarkdownText(
-    processableHeadings.map((h) => new Heading(h)),
-    options
-  );
+  const delimiter = options.delimiter ? options.delimiter : "|";
+  return topLevelHeadings
+    .map((heading) => `${heading.markdownHref}`)
+    .join(` ${delimiter.trim()} `);
 }
