@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Extract headings should match snapshot 1`] = `
+exports[`Extract headings build markdown text should match snapshot 1`] = `
 "1. [[#foo]]
 	1. [[#bar]]
 		1. [[#baz]]
 			1. [[#Something Alt Text|Alt Text]]"
 `;
 
-exports[`Extract headings should match snapshot with inconsistent heading levels 1`] = `
+exports[`Extract headings build markdown text should match snapshot with inconsistent heading levels 1`] = `
 "1. [[#Level 2]]
 	1. [[#Level 4]]
 1. [[#Level 2]]
 	1. [[#Level 3]]"
 `;
 
-exports[`Extract headings should match snapshot with title 1`] = `
+exports[`Extract headings build markdown text should match snapshot with title 1`] = `
 "## Table of Contents
 1. [[#foo]]
 	1. [[#bar]]
