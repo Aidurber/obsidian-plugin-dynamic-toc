@@ -28,6 +28,17 @@ export class DynamicTOCSettingsTab extends PluginSettingTab {
             await this.plugin.saveSettings();
           })
       );
+    new Setting(containerEl)
+      .setName("Enable varied style")
+      .setDesc(
+        "Varied style allows for the most top level heading to match your list style, then subsequent levels to be the opposite. For example if your list style is number, then your level 2 headings will be number, any levels lower then 2 will be bullet and vice versa."
+      )
+      .addToggle((cb) =>
+        cb.setValue(this.plugin.settings.varied_style).onChange(async (val) => {
+          this.plugin.settings.varied_style = val;
+          await this.plugin.saveSettings();
+        })
+      );
 
     new Setting(containerEl)
       .setName("Delimiter")

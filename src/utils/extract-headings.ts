@@ -21,6 +21,18 @@ export function extractHeadings(
   return buildMarkdownText(headingInstances, options);
 }
 
+function getIndicator(
+  heading: Heading,
+  firstLevel: number,
+  options: TableOptions
+) {
+  const defaultIndicator = (options.style === "number" && "1.") || "-";
+  if (!options.varied_style) return defaultIndicator;
+  // if the heading is at the same level as the first heading and varied_style is true, then only set the first indicator to the selected style
+  if (heading.level === firstLevel) return defaultIndicator;
+  return options.style === "number" ? "-" : "1.";
+}
+
 /**
  * Generate markdown for a standard table of contents
  * @param headings - Array of heading instances
@@ -33,10 +45,12 @@ function buildMarkdownText(headings: Heading[], options: TableOptions): string {
   if (options.title) {
     list.push(`${options.title}`);
   }
+
   let previousIndent = 0;
   for (let i = 0; i < headings.length; i++) {
     const heading = headings[i];
-    const itemIndication = (options.style === "number" && "1.") || "-";
+
+    const itemIndication = getIndicator(heading, firstHeadingDepth, options);
     let numIndents = new Array(Math.max(0, heading.level - firstHeadingDepth));
 
     if (options.allow_inconsistent_headings) {
