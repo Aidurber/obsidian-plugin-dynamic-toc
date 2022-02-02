@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.25](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.24...0.0.25) (2022-02-02)
+
+
+### Features
+
+* add inline breakcrumb style ([93dba71](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/93dba71dcfad10bde5924ebf45f6e11b183a3691))
+
 ### [0.0.24](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.23...0.0.24) (2022-02-01)
 
 
