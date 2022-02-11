@@ -18,3 +18,7 @@
 .is-live-preview .dynamic-toc ul {
     white-space: normal;
 }
+
+.is-live-preview .dynamic-toc ol {
+    white-space: normal;
+}
