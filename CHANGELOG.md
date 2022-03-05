@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.27](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.26...0.0.27) (2022-03-05)
+
+
+### Bug Fixes
+
+* codeblock not rerendering live preview ([ee06781](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/commit/ee067813482eca2f6b962a913d4f7ff255c33560))
+
 ### [0.0.26](https://github.com/Aidurber/obsidian-plugin-dynamic-toc/compare/0.0.25...0.0.26) (2022-02-02)
 
 
