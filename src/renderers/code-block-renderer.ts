@@ -1,4 +1,10 @@
-import { App, MarkdownRenderChild, MarkdownRenderer, TFile } from "obsidian";
+import {
+  App,
+  MarkdownRenderChild,
+  MarkdownRenderer,
+  TFile,
+  WorkspaceLeaf,
+} from "obsidian";
 import { mergeSettings } from "../utils/config";
 import { extractHeadings } from "../utils/extract-headings";
 import { DynamicTOCSettings, TableOptions } from "../types";
@@ -23,15 +29,28 @@ export class CodeBlockRenderer extends MarkdownRenderChild {
       )
     );
     this.registerEvent(
+      this.app.workspace.on(
+        "active-leaf-change",
+        this.onActiveLeafChangeHandler
+      )
+    );
+    this.registerEvent(
       this.app.metadataCache.on("changed", this.onFileChangeHandler)
     );
   }
+
+  onActiveLeafChangeHandler = (_: WorkspaceLeaf) => {
+    const activeFile = this.app.workspace.getActiveFile();
+    this.filePath = activeFile.path;
+    this.onFileChangeHandler(activeFile);
+  };
 
   onSettingsChangeHandler = (settings: DynamicTOCSettings) => {
     this.render(mergeSettings(this.config, settings));
   };
   onFileChangeHandler = (file: TFile) => {
-    if (file.deleted || file.path !== this.filePath) return;
+    this.filePath = file.path;
+    if (file.deleted) return;
     this.render();
   };
 
