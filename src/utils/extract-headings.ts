@@ -1,4 +1,4 @@
-import { CachedMetadata } from "obsidian";
+import { CachedMetadata, MetadataCache, parseLinktext,HeadingCache, EmbedCache } from "obsidian";
 import { Heading } from "../models/heading";
 import { TableOptions } from "../types";
 
@@ -21,6 +21,51 @@ export function extractHeadings(
   return buildMarkdownText(headingInstances, options);
 }
 
+export function mergeEmbeds(metadataCache: MetadataCache, filePath: string, options: TableOptions) {
+  const fileMetaData = metadataCache.getCache(filePath)
+  //if (not embeds parsing allowed in options ) return fileMetaData;
+  if (!fileMetaData?.headings || !fileMetaData?.embeds) return fileMetaData;
+  const { headings, embeds } = fileMetaData;
+  const processableHeadings = headings.filter(
+    (h) => !!h && h.level >= options.min_depth && h.level <= options.max_depth
+  );
+  if (!processableHeadings.length) return fileMetaData;
+
+  //[h1,h2,...] -> {h1.heading: h1, h2.heading: h2, ...}
+  const headingsDb = processableHeadings
+    .reduce((agg,h) => ({...agg, [h.heading]: h }), {})
+
+  const grabEmbeddedHeadings = (agg:Object, e:EmbedCache) => {
+    const offset = headingsDb[e.original].level;
+    const eheadings = 
+      linkToCachedMetadata(e.link, metadataCache)
+      .headings
+      .filter(h => h.level > 1)
+      .map(tweakOffset(offset));
+    return {...agg, [e.original]: eheadings };
+  }
+
+  //[e1,e2,...] -> {e1.original: e1.headings, ...}
+  const embeddedHeadingsDb = embeds
+    .filter( (e) => e.original in headingsDb)
+    .reduce(grabEmbeddedHeadings,{});
+
+  const patchedHeadings = headings.flatMap(h => {
+    const eheadings = embeddedHeadingsDb[h.heading];
+    return (eheadings) ? [h,...eheadings] : [h];
+  });
+
+  return {headings:patchedHeadings} as CachedMetadata;
+}
+
+function tweakOffset(offset: number) {
+  return (h: HeadingCache) => ({ ...h, level: h.level + offset - 1 });
+}
+function linkToCachedMetadata(link:string, metadataCache: MetadataCache) {
+  const {path,subpath}= parseLinktext(link)
+  const f = metadataCache.getFirstLinkpathDest(path,subpath)
+  return metadataCache.getCache(f.path)
+}
 function getIndicator(
   heading: Heading,
   firstLevel: number,
