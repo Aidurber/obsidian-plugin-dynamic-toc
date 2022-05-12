@@ -32,17 +32,19 @@ The following is an example of consistent heading depth. After a level 2 heading
 
 It's really simple to use, just add a code block to your document:
 
+> 👉YAML does not support tabs, only use spaces ([source](http://yaml.org/faq.html))
+
 **Defaults**
 
 ````markdown
 ```toc
-	style: bullet | number | inline (default: bullet)
-	min_depth: number (default: 2)
-	max_depth: number (default: 6)
-	title: string (default: undefined)
-	allow_inconsistent_headings: boolean (default: false)
-	delimiter: string (default: |)
-	varied_style: boolean (default: false)
+style: bullet | number | inline (default: bullet)
+min_depth: number (default: 2)
+max_depth: number (default: 6)
+title: string (default: undefined)
+allow_inconsistent_headings: boolean (default: false)
+delimiter: string (default: |)
+varied_style: boolean (default: false)
 ```
 ````
 
@@ -50,9 +52,9 @@ It's really simple to use, just add a code block to your document:
 
 ````markdown
 ```toc
-	style: number
-	min_depth: 1
-	max_depth: 6
+style: number
+min_depth: 1
+max_depth: 6
 ```
 ````
 
@@ -151,7 +153,7 @@ You can add a title to every injected table of contents by using the Title optio
 
 ````markdown
 ```toc
-	title: "## Table of Contents"
+title: "## Table of Contents"
 ```
 ````
 
